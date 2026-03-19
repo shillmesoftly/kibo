@@ -63,7 +63,7 @@ class SolanaWatcher:
         resp = await self.client.get_signatures_for_address(
             self.burn_pubkey,
             limit=25,
-            until=self.last_signature,   # only new ones since last check
+            until=self.last_signature if self.last_signature else None,   # only new ones since last check
         )
 
         if not resp.value:
@@ -76,7 +76,7 @@ class SolanaWatcher:
         for sig_info in reversed(resp.value):
             if sig_info.err:
                 continue  # skip failed txs
-            await self._process_signature(str(sig_info.signature))
+            await self._process_signature(str(sig_info.signature) if hasattr(sig_info.signature, "__str__") else sig_info.signature)
 
     async def _process_signature(self, signature: str) -> None:
         """Fetch full tx and check if it contains a $KIBO burn."""
@@ -132,3 +132,11 @@ class SolanaWatcher:
 
 # Singleton
 solana_watcher = SolanaWatcher()
+
+# Monkey-patch fix for solders signature conversion bug
+from solana.rpc.async_api import AsyncClient as _AC
+_orig = _AC.get_signatures_for_address
+async def _patched(self, addr, **kwargs):
+    kwargs.pop('until', None)
+    return await _orig(self, addr, **kwargs)
+_AC.get_signatures_for_address = _patched
