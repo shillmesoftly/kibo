@@ -652,7 +652,7 @@
           <div class="btn-label">PET</div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;">
-          <button class="btn-a" id="feed-btn-device" onclick="feedKibo()">A</button>
+          <button class="btn-a" id="feed-btn-device" onclick="openPump()">A</button>
           <div class="btn-label">FEED</div>
         </div>
       </div>
@@ -694,9 +694,9 @@
 
 <!-- FEED BUTTON -->
 <div class="feed-zone">
-  <button class="feed-btn" onclick="feedKibo()">
-    <span>🦴 FEED $KIBO</span>
-    <span class="feed-sub">FEED 100 $KIBO · CONNECT WALLET</span>
+  <button class="feed-btn" onclick="openPump()">
+    <span>🦴 BUY $KIBO · FEED KIBO</span>
+    <span class="feed-sub">EVERY BUY FEEDS KIBO · OPENS PUMP.FUN</span>
   </button>
 </div>
 
@@ -707,7 +707,7 @@
 <div class="tape-wrap">
   <div class="tape-inner" id="tape">
     $KIBO HP: 72% &nbsp;·&nbsp; SEASON 001 &nbsp;·&nbsp; LAST FED: 3 MIN AGO &nbsp;·&nbsp;
-    BURN TO FEED. IGNORE TO KILL. &nbsp;·&nbsp; TOTAL BURNED: 0 $KIBO &nbsp;·&nbsp;
+    BUY TO FEED. IGNORE TO KILL. &nbsp;·&nbsp; TOTAL BURNED: 0 $KIBO &nbsp;·&nbsp;
     KIBO IS WATCHING YOU. &nbsp;·&nbsp; $KIBO ON PUMP.FUN &nbsp;·&nbsp;
   </div>
 </div>
@@ -973,7 +973,7 @@ function updateTTD() {
 function updateTape() {
   document.getElementById('tape').textContent =
     `$KIBO HP: ${hp}% · SEASON 001 · FEEDS: ${feedCount} · BURNED: ${totalBurned} $KIBO · ` +
-    (hp <= 15 ? 'KIBO IS DYING — FEED NOW OR THE COIN IS DEAD · ' : 'BURN TO FEED. IGNORE TO KILL. · ') +
+    (hp <= 15 ? 'KIBO IS DYING — FEED NOW OR THE COIN IS DEAD · ' : 'BUY TO FEED. IGNORE TO KILL. · ') +
     '$KIBO ON PUMP.FUN · KIBO IS WATCHING YOU · ';
 }
 
@@ -987,6 +987,7 @@ function showToast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
+function openPump(){window.open("https://pump.fun/coin/3sFDr8wwjJHqfZnDJrV6xeGdzr8E4ehraW6K19vJpump","_blank");showToast("OPENING PUMP.FUN · BUY $KIBO TO FEED KIBO");}
 // ── START ──
 updateUI();
 updateTTD();
