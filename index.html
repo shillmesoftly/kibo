@@ -729,7 +729,7 @@
 // ── CONFIG ── swap this for your Railway URL after deploy
 const WS_URL        = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
   ? 'ws://localhost:8000/ws'
-  : 'wss://YOUR-RAILWAY-APP.up.railway.app/ws';   // ← replace after Railway deploy
+  : 'wss://kibo-production.up.railway.app/ws';   // ← replace after Railway deploy
 
 const API_URL       = WS_URL.replace('wss://', 'https://').replace('ws://', 'http://').replace('/ws', '');
 const TOKENS_PER_FEED = 100;
