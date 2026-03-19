@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 RPC_URL         = os.getenv("SOLANA_RPC_URL", "https://api.mainnet-beta.solana.com")
 KIBO_MINT       = os.getenv("KIBO_MINT_ADDRESS", "")
-BURN_ADDRESS    = os.getenv("KIBO_BURN_ADDRESS", "1nc1nerator11111111111111111111111111111111")
+BURN_ADDRESS    = os.getenv("KIBO_BURN_ADDRESS", "DXixSU5wPYK9NPGoe5KoEvecfRDBeYfDsCeWmnfACxBu")
 POLL_INTERVAL_S = int(os.getenv("POLL_INTERVAL_S", "15"))
 TOKENS_PER_FEED = int(os.getenv("TOKENS_PER_FEED", "100"))
 
@@ -87,7 +87,7 @@ class SolanaWatcher:
                 post_amt = int(post_bal["uiTokenAmount"]["amount"])
                 delta = post_amt - pre_amt
                 if delta > 0:
-                    return delta
+                    return delta  # tokens received = feed amount
         except Exception as e:
             logger.debug(f"Parse error: {e}")
         return None
